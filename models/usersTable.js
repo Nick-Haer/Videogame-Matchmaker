@@ -1,5 +1,4 @@
 var bcrypt = require("bcryptjs");
-var games = require("./gamesTable.js");
 module.exports = function(sequelize, DataTypes) {
   var Users = sequelize.define("users", {
     id: {
@@ -27,9 +26,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    createdAt: Sequelize.DATE
+    createdAt: DataTypes.DATE
   });
-  Users.hasMany(games);
+  Users.associate = (models) =>{
+    Users.hasMany(models.games)
+  }
 
   Users.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
