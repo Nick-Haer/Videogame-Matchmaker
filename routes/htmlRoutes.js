@@ -3,13 +3,28 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
-    });
+    res.json("hello")
+    // db.Example.findAll({}).then(function(dbExamples) {
+    //   res.render("index", {
+    //     msg: "Welcome!",
+    //     examples: dbExamples
+    //   });
+    // }
+    // );
   });
+
+
+
+  //get games I matched with
+
+  //get contact us
+
+  //get about us
+
+  //get preferences
+
+  //sign-in
+
 
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
