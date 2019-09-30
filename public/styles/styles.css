@@ -52,12 +52,6 @@ h1 {
 }
  #small-logo{
    width: 45px;
+   height: 45px;
  }
- #logo{
-  display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 30%;
-    border: solid white;
-    margin-top: 2%;
- }
+
