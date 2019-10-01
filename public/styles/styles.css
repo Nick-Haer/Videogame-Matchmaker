@@ -48,9 +48,53 @@ h1 {
   }
   100% {
     transform:translateX(25%);
-  }
-}
+  } 
+ }
  #small-logo{
    width: 45px;
    height: 45px;
+   border: solid rgb(136, 40, 40);
  }
+ .site-content{
+  margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.781);
+    width: 76%;
+    margin-top: 3%;
+    padding: 1%;
+    border: 5px double darkslategray;
+    border-radius: 18px;
+    margin-bottom: 3%;
+  }
+ img{
+  width: 300px;
+  height: 300px;
+  border: solid black;
+ }
+ .selection{
+  width: 50%;
+  border: solid rgb(116, 38, 38);
+  border-radius: 6px;
+  padding: 0.5%;
+  margin-top: 1.5%;
+ }
+ hr{
+  border: double rgb(129, 41, 41);
+ }
+ .questions{
+  font-family: 'Grenze', serif;
+ }
+ .submit{
+   text-align: center;
+ }
+ #submit-btn{
+  width: 13%;
+  border: solid brown;
+  padding: 0.5%;
+  background-color: white;
+ }
+ #submit-btn:hover {
+  background-image: linear-gradient(brown, black);
+  color: white;
+  border: solid gray;
+}
