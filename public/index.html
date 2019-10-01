@@ -8,6 +8,8 @@
     <title>Next Virtue</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Grenze&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
@@ -18,7 +20,7 @@
 
     <div class="header">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <iframe src="https://giphy.com/embed/3o6ZsUUMA1mhMthxwQ" id="small-logo"></iframe>       
+            <iframe src="https://giphy.com/embed/3o6ZsUUMA1mhMthxwQ" id="small-logo"></iframe>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,10 +47,119 @@
         </nav>
     </div>
     <div class="site-content">
-        <h1>content will be here </h1>
+        <div class="about-the-test">
+            <h2></h2>
+        </div>
+        <div class="questions" id="question1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="./images/first-pic.png" alt="first question picture">
+                    </div>
+                    <div class="col-8">
+                        <h3>Choose what would be the best description of the image.</h3>
+                        <select class="selection">
+                            <option disabled selected>Select an Option</option>
+                            <option value="long">Gargoyle</option>
+                            <option value="medium">Wolf</option>
+                            <option value="short">Wasp</option>
+                            <!-- time to complete -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="questions" id="question2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="./images/second-pic.png" alt="first question picture">
+                    </div>
+                    <div class="col-8">
+                        <h3>Choose what would be the best description of the image.</h3>
+                        <select class="selection">
+                            <option disabled selected>Select an Option</option>
+                            <option value="low">Pigs</option>
+                            <option value="medium">Bridge</option>
+                            <option value="high">Magicians</option>
+                            <!-- rating -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="questions" id="question3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="./images/third-pic.png" alt="first question picture">
+                    </div>
+                    <div class="col-8">
+                        <h3>Choose what would be the best description of the image.</h3>
+                        <select class="selection">
+                            <option disabled selected>Select an Option</option>
+                            <option value="old">Totem</option>
+                            <option value="medium">Pitbull</option>
+                            <option value="new">Starship</option>
+                            <!--release date  -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="questions" id="question4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="./images/fourth-pic.png" alt="first question picture">
+                    </div>
+                    <div class="col-8">
+                        <h3>Choose what would be the best description of the image.</h3>
+                        <select class="selection">
+                            <option disabled selected>Select an Option</option>
+                            <option value="multi">Two people with swords</option>
+                            <option value="single">Fighter jet</option>
+                            <!-- if multiplayer -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="questions" id="question5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="./images/fifth-pic.png" alt="first question picture">
+                    </div>
+                    <div class="col-8">
+                        <h3>Choose what would be the best description of the image.</h3>
+                        <select class="selection">
+                            <option disabled selected>Select an Option</option>
+                            <option value="strategy">Planes bombing a town</option>
+                            <option value="sport">People boxing</option>
+                            <option value="puzzle">A gate</option>
+                            <option value="Adventure">Batman symbol</option>
+                            <option value="Indie">Two people with parachutes</option>
+                            <option value="rpg">Hands parting the water</option>
+                            <option value="shooter">Something hit by a bullet</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="submit">
+            <button id="submit-btn">Submit</button>
+        </div>
     </div>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
