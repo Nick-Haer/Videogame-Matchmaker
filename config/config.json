@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "63_TRooTandTree!",
+    "password": "password",
     "database": "next_venture_db",
     "host": "localhost",
     "dialect": "mysql"
