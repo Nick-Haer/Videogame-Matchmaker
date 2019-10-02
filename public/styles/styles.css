@@ -101,6 +101,36 @@ h1 {
   border: solid gray;
 }
 
-/* .navbar {
-  padding-left: 12%;
-} */
+#login-content{
+  text-align: center;
+  width: 45%;
+  font-family: 'Grenze', serif;
+
+}
+#login-btn, #go-to-signup-btn, #signup-btn{
+  width: 13%;
+  border: solid brown;
+  padding: 0.5%;
+  background-color: white;
+ }
+ #login-btn:hover, #go-to-signup-btn:hover, #signup-btn:hover {
+  background-image: linear-gradient(brown, black);
+  color: white;
+  border: solid gray;
+}
+.signup{
+  margin-top: 10px;
+}
+#signup-content{
+  text-align: center;
+  width: 45%;
+  font-family: 'Grenze', serif;
+
+}
+.cards{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+  font-family: 'Grenze', serif;
+
+}
