@@ -178,11 +178,16 @@ module.exports = function (app) {
         'Accept': 'application/json',
         'user-key': "1c746b7def293989e73177e70e53a42f"
       },
-      data: `fields name; where release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & time_to_beat> ${minMinsToComplete} & time_to_beat<= ${maxMinsToComplete} & game_modes.slug = "${multiplayerStatus}" & genres = [${genreId}]; sort popularity desc;`
+      data: `fields name, screenshots.*, cover.*, time_to_beat; where release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & time_to_beat> ${minMinsToComplete} & time_to_beat<= ${maxMinsToComplete} & game_modes.slug = "${multiplayerStatus}" & genres = [${genreId}]; sort popularity desc;`
     })
       .then(response => {
 
         gameData = response.data
+
+        console.log(Object.keys(gameData))
+        console.log(Object.keys(gameData[0].screenshots[0].url))
+        console.log(gameData[0].screenshots[0].url)
+        console.log(gameData)
 
         // console.log(Object.keys(response))
         // console.log(response.data)

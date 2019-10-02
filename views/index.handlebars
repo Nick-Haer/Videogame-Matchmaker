@@ -3,11 +3,15 @@
     <div class="row">
       <div class="col-8 offset-2">
 
+
+
+
+
             <div class="bg"></div>
     <div class="bg bg2"></div>
     <div class="bg bg3"></div>
         {{!-- <h1>{{msg}}</h1> --}}
-        <h2>This is our Home Page!</h2>
+        {{!-- <h2>This is our Home Page!</h2> --}}
         {{!-- <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="example-text">Example Text</label>
@@ -19,12 +23,17 @@
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form> --}}
-        <h3>You Matched With:</h3>
+        {{!-- <h3>You Matched With:</h3> --}}
         <ul id="example-list" class="list-group">
           {{#each games}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.name}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
+            <h5>{{name}}</h5>
+            {{!-- <hr> --}}
+            <img class="gameImage" src="https:{{cover.url}}" alt="https://steamuserimages-a.akamaihd.net/ugc/1136285831726016610/8ABCD19214B516DCD4E351E241C969C6A0C8F9D8/">
+            <div></div>
+            <span>Time to Beat: {{time_to_beat}}</span>
+            {{!-- <a href="example/{{this.id}}">{{this.name}}</a> --}}
+            <button class="btn btn-primary float-right save">Save To Preferences</button>
           </li>
           {{/each}}
         </ul>

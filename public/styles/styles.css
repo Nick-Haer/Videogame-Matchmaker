@@ -68,8 +68,8 @@ h1 {
     margin-bottom: 3%;
   }
  img{
-  width: 85%;
-  /* width: 300px; */
+  /* width: 85%; */
+  width: 300px;
   height: 300px;
   border: solid black;
  }
