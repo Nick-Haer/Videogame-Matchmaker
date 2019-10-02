@@ -4,6 +4,62 @@
 // var $submitBtn = $("#submit");
 // var $exampleList = $("#example-list");
 
+$(document).ready(function () {
+
+
+  $("#submit-btn").on("click", function () {
+
+    event.preventDefault()
+
+
+
+
+
+    //data -id
+
+    // localStorage.setItem('firstGame', ($("#name").val().trim()));
+
+    // post request to save to file
+
+
+
+    $.ajax({
+      method: "GET",
+      url: "/api/games",
+      data: { 
+      time: $("#time").val(),
+      rating: $("#rating").val(),
+      released_date: $("#released_date").val(),
+      multiplayer: $("#multiplayer").val(),
+      genre: $("#genre").val(),
+      }
+    })
+      .then(response => {
+        window.location.href = "/api/gamesDisplay"
+        console.log(response)
+        // console.log("ajax")
+
+        // response.redirect("/api/gameDisplay")
+
+    
+      })
+      .catch(err => {
+        throw err;
+      })
+
+  })
+
+
+
+
+})
+
+
+
+
+
+
+
 
 // The API object contains methods for each kind of request we'll make
 // var API = {
