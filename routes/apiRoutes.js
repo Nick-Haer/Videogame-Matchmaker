@@ -1,5 +1,5 @@
-var db = require("../models");
-var passport = require("../config/passport");
+const db = require("../models");
+const passport = require("../config/passport");
 const axios = require("axios")
 
 
@@ -83,36 +83,40 @@ module.exports = function (app) {
 
     console.log(genre)
 
-    switch (genre) {
-      case "strategy":
-        genreId = 15
+    let [genreOne, genreTwo, genreThree] = genre.split(", ");
 
-        break;
-      case "sport":
-        genreId = 14
+    console.log(genreOne)
 
-        break;
-      case "puzzle":
-        genreId = 9
+    // switch (genre) {
+    //   case "strategy":
+    //     genreId = 15
 
-        break;
-      case "adventure":
-        genreId = 31
+    //     break;
+    //   case "sport":
+    //     genreId = 14
 
-        break;
-      case "indie":
-        genreId = 32
+    //     break;
+    //   case "puzzle":
+    //     genreId = 9
 
-        break;
-      case "rpg":
-        genreId = 12
+    //     break;
+    //   case "adventure":
+    //     genreId = 31
 
-        break;
-      case "shooter":
-        genreId = 5
+    //     break;
+    //   case "indie":
+    //     genreId = 32
 
-        break;
-    }
+    //     break;
+    //   case "rpg":
+    //     genreId = 12
+
+    //     break;
+    //   case "shooter":
+    //     genreId = 5
+
+    //     break;
+    // }
 
 
     switch (time) {
@@ -178,7 +182,7 @@ module.exports = function (app) {
         'Accept': 'application/json',
         'user-key': "1c746b7def293989e73177e70e53a42f"
       },
-      data: `fields name, screenshots.*, cover.*, time_to_beat; where release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & time_to_beat> ${minMinsToComplete} & time_to_beat<= ${maxMinsToComplete} & game_modes.slug = "${multiplayerStatus}" & genres = [${genreId}]; sort popularity desc;`
+      data: `fields name, screenshots.*, cover.*, time_to_beat; where (release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & time_to_beat> ${minMinsToComplete} & time_to_beat<= ${maxMinsToComplete} & game_modes.slug = "${multiplayerStatus}") & (genres.slug = "${genreOne}" | genres.slug = "${genreTwo}" | genres.slug = "${genreThree}"); sort popularity desc;`
     })
       .then(response => {
 
