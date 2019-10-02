@@ -180,17 +180,17 @@ module.exports = function (app) {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'user-key': "1c746b7def293989e73177e70e53a42f"
+        'user-key': process.env.API_KEY
       },
-      data: `fields name, screenshots.*, cover.*, time_to_beat; where (release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & time_to_beat> ${minMinsToComplete} & time_to_beat<= ${maxMinsToComplete} & game_modes.slug = "${multiplayerStatus}") & (genres.slug = "${genreOne}" | genres.slug = "${genreTwo}" | genres.slug = "${genreThree}"); sort popularity desc;`
+      data: `fields name, screenshots.*, summary, platforms.slug, total_rating, cover.*, genres.slug, time_to_beat; where (release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & time_to_beat> ${minMinsToComplete} & time_to_beat<= ${maxMinsToComplete} & game_modes.slug = "${multiplayerStatus}") & (genres.slug = "${genreOne}" | genres.slug = "${genreTwo}" | genres.slug = "${genreThree}"); sort popularity desc;`
     })
       .then(response => {
 
         gameData = response.data
 
-        console.log(Object.keys(gameData))
-        console.log(Object.keys(gameData[0].screenshots[0].url))
-        console.log(gameData[0].screenshots[0].url)
+        console.log(Object.keys(gameData[0]))
+        // console.log(Object.keys(gameData[0].screenshots[0].url))
+        // console.log(gameData[0].screenshots[0].url)
         console.log(gameData)
 
         // console.log(Object.keys(response))
