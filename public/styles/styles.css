@@ -54,6 +54,7 @@ h1 {
    width: 45px;
    height: 45px;
    border: solid rgb(136, 40, 40);
+   /* margin-right: 2%; */
  }
  .site-content{
   margin-left: auto;
@@ -67,6 +68,7 @@ h1 {
     margin-bottom: 3%;
   }
  img{
+  /* width: 85%; */
   width: 300px;
   height: 300px;
   border: solid black;
@@ -98,6 +100,7 @@ h1 {
   color: white;
   border: solid gray;
 }
+
 #login-content{
   text-align: center;
   width: 45%;
