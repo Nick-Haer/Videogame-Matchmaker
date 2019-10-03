@@ -22,8 +22,8 @@ $(document).ready(function () {
     last: $("#last-name-input").val().trim()
   })
     .then(response => {
-      // window.location.reload();
-      alert("Access Granted! You may proceed to login")
+      window.location.reload();
+      console.log("Access Granted! You may proceed to login")
       console.log(response)
       // console.log("ajax")
 

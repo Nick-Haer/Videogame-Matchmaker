@@ -55,7 +55,7 @@ module.exports = function (app) {
       lastName: req.body.last
     })
       .then(() => {
-        res.redirect(307, "/api/loginPage");
+        // res.redirect(307, "/api/loginPage");
       })
       .catch((err) => {
         res.status(401).json(err);
