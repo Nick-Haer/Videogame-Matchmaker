@@ -31,5 +31,9 @@
     "eslint-plugin-prettier": "^3.1.0",
     "mocha": "^6.1.4",
     "prettier": "^1.17.1"
+  },
+  "engines": {
+    "node": "12.1"
+    
   }
 }
