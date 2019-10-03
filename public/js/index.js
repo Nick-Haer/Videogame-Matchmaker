@@ -14,7 +14,6 @@ $(document).ready(function () {
   console.log("electric")
 
 
-  function signUpUser(email, password, first, last) {
   $.post("/api/createAccount", {
     email: $("#signUpEmail").val().trim(),
     password: $("#signUpPassword").val().trim(),
@@ -34,9 +33,24 @@ $(document).ready(function () {
     .catch(err => {
       throw err;
     })
-  }
+  
 
-  signUpUser()
+  })
+
+  $("#login-btn").on("click", function(event){
+    event.preventDefault()
+
+    $.post("/api/loginPage", {
+      email: $("#loginEmail").val().trim(),
+      password: $("#loginPassword").val().trim()
+    }).then(function(){
+      window.location.replace("/");
+        // If there's an error, log the error
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    
   })
 
   $("#submit-btn").on("click", function () {

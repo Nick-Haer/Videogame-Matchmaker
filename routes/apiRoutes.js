@@ -67,7 +67,6 @@ module.exports = function (app) {
   app.get("/api/gamesDisplay", function (req, res) {
 
 
-
     for (let game of gameData) {
       // console.log(game.total_rating)
       let {total_rating} = game
@@ -89,7 +88,7 @@ module.exports = function (app) {
 
   app.get("/api/games", function (req, res) {
     // console.log(req.query);
-
+    console.log(req.user);
     let { time, rating, released_date, multiplayer, genre } = req.query;
 
     // console.log(multiplayer)
