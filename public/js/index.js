@@ -7,13 +7,41 @@
 $(document).ready(function () {
 
 
+  $("#signup-btn").on("click", function (event){
+
+  event.preventDefault()
+
+  console.log("electric")
+
+
+  function signUpUser(email, password, first, last) {
+  $.post("/api/createAccount", {
+    email: $("#signUpEmail").val().trim(),
+    password: $("#signUpPassword").val().trim(),
+    first: $("#first-name-input").val().trim(),
+    last: $("#last-name-input").val().trim()
+  })
+    .then(response => {
+      // window.location.reload();
+      alert("Access Granted! You may proceed to login")
+      console.log(response)
+      // console.log("ajax")
+
+      // response.redirect("/api/gameDisplay")
+
+  
+    })
+    .catch(err => {
+      throw err;
+    })
+  }
+
+  signUpUser()
+  })
+
   $("#submit-btn").on("click", function () {
 
     event.preventDefault()
-
-
-
-
 
     //data -id
 

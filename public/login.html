@@ -54,15 +54,15 @@
                     <h2>Log In</h2>
                     <form>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
+                            <label for="loginEmal">Email address</label>
+                            <input type="email" class="form-control" id="loginEmal"
                                 aria-describedby="emailHelp" placeholder="Enter email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                                 else.</small>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
+                            <label for="loginPassword">Password</label>
+                            <input type="password" class="form-control" id="loginPassword"
                                 placeholder="Password">
                         </div>
                         <div class="submit">
@@ -84,24 +84,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                        <h2>Sign Up</h2>
+                    <h2>Sign Up</h2>
                     <form>
+                        <div class="row">
+                            <div class="col">
+                                    <label for="first-name-input">First Name</label>
+                                <input type="text" class="form-control" placeholder="First name" id="first-name-input">
+                            </div>
+                            <div class="col">
+                                    <label for="last-name-input">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Last name" id="last-name-input">
+                            </div>
+                        </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
+                            <label for="signUpEmail">Email address</label>
+                            <input type="email" class="form-control" id="signUpEmail"
                                 aria-describedby="emailHelp" placeholder="Enter email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                                 else.</small>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
+                            <label for="signUpPassword">Password</label>
+                            <input type="password" class="form-control" id="signUpPassword"
                                 placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Enter Password Again</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                placeholder="Enter Password Again">
                         </div>
                         <div class="submit">
                             <button id="signup-btn">SignUp</button>
@@ -113,15 +118,16 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $("#signup-content").hide();
 
-            $("#go-to-signup-btn").on("click", function(){
+            $("#go-to-signup-btn").on("click", function () {
                 $("#login-content").hide();
                 $("#signup-content").show();
             })
         })
     </script>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
