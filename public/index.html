@@ -8,6 +8,7 @@
     <title>Next Venture</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link href="https://fonts.googleapis.com/css?family=Grenze&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./styles/styles.css">
@@ -21,31 +22,32 @@
     <div class="header">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <iframe src="https://giphy.com/embed/3o6ZsUUMA1mhMthxwQ" id="small-logo" href="#"></iframe>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">-->
+            <!-- <li class="nav-item active"> -->
             <h5 class="siteTitle">Next Venture</h5>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="login.html">Log In <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Preferences<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="about-us.html">About Us<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="contact-us.html">Contact Us <span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+           
+                <a href="index.html">Home <span class="sr-only">(current)</span></a>
+                <!-- </li> -->
+                <!-- <li class="nav-item active"> -->
+                <a href="login.html">Log In <span class="sr-only">(current)</span></a>
+                <!-- </li> -->
+                <!-- <li class="nav-item active"> -->
+                <a href="#">Preferences<span class="sr-only">(current)</span></a>
+                <!-- </li> -->
+                <!-- <li class="nav-item active"> -->
+                <a href="about-us.html">About Us<span class="sr-only">(current)</span></a>
+                <!-- </li> -->
+                <!-- <li class="nav-item active"> -->
+                <a href="contact-us.html">Contact Us <span class="sr-only">(current)</span></a>
+                <!-- </li> -->
+            
+            <!-- </ul> -->
+    </div>
+    </nav>
     </div>
     <div class="site-content">
         <div class="questions" id="question1">
@@ -71,10 +73,10 @@
         <div class="questions" id="question2">
             <div class="container">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-lg-4 col-sm-8">
                         <img src="./images/second-pic.png" alt="first question picture">
                     </div>
-                    <div class="col-8">
+                    <div class="col-lg-8 col-sm-4">
                         <h3>Choose what would be the best description of the image.</h3>
                         <select id="rating" class="selection">
                             <option disabled selected>Select an Option</option>
@@ -91,10 +93,10 @@
         <div class="questions" id="question3">
             <div class="container">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-lg-4 col-sm-8">
                         <img src="./images/third-pic.png" alt="first question picture">
                     </div>
-                    <div class="col-8">
+                    <div class="col-lg-8 col-sm-4">
                         <h3>Choose what would be the best description of the image.</h3>
                         <select id="released_date" class="selection">
                             <option disabled selected>Select an Option</option>
@@ -111,10 +113,10 @@
         <div class="questions" id="question4">
             <div class="container">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-lg-4 col-sm-8">
                         <img src="./images/fourth-pic.png" alt="first question picture">
                     </div>
-                    <div class="col-8">
+                    <div class="col-lg-8 col-sm-4">
                         <h3>Choose what would be the best description of the image.</h3>
                         <select id="multiplayer" class="selection">
                             <option disabled selected>Select an Option</option>
@@ -130,10 +132,10 @@
         <div class="questions" id="question5">
             <div class="container">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-lg-4 col-sm-8">
                         <img src="./images/fifth-pic.png" alt="first question picture">
                     </div>
-                    <div class="col-8">
+                    <div class="col-lg-8 col-sm-4">
                         <h3>Choose all the images you see</h3>
                         <select id="genre" class="selection">
                             <option disabled selected>Select an Option</option>
@@ -141,7 +143,7 @@
                             <option value="sport, racing, simulator">People boxing</option>
                             <option value="indie, arcade, adventure">Two people with parachutes</option>
                             <option value="rpg, adventure, simulator">Hands parting the water</option>
-                            
+
                         </select>
                     </div>
                 </div>
@@ -156,6 +158,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./js/index.js"></script>
+
+
 </body>
 
 </html>
