@@ -2,6 +2,9 @@ const db = require("../models");
 const passport = require("../config/passport");
 const axios = require("axios")
 
+console.log(db.sequelize)
+console.log(Object.keys(db))
+
 
 let gameData;
 
@@ -36,7 +39,28 @@ module.exports = function (app) {
 
   // window.location.query
 
-  //post for sign in
+  app.post("/api/loginPage", passport.authenticate("local"), function(req, res) {
+    res.json(req.user);
+  });
+
+
+  
+  app.post("/api/createAccount", function(req, res) {
+    console.log(Object.keys(req.body))
+
+    db.users.create({
+      email: req.body.email,
+      password: req.body.password,
+      firstName: req.body.first,
+      lastName: req.body.last
+    })
+      .then(() => {
+        res.redirect(307, "/api/loginPage");
+      })
+      .catch((err) => {
+        res.status(401).json(err);
+      });
+  });
 
   //post for pick a reference
 
