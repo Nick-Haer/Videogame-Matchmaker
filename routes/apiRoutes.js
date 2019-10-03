@@ -42,6 +42,19 @@ module.exports = function (app) {
 
   app.get("/api/gamesDisplay", function (req, res) {
 
+
+
+    for (let game of gameData) {
+      // console.log(game.total_rating)
+      let {total_rating} = game
+      console.log(total_rating)
+      let roundedRating = Math.round(total_rating)
+      game.total_rating = roundedRating 
+
+
+      let {}
+    }
+
     res.render("index", {
       games: gameData
     })
