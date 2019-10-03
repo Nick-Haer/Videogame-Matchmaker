@@ -188,7 +188,7 @@ module.exports = function (app) {
 
         gameData = response.data
 
-        console.log(Object.keys(gameData[0]))
+        // console.log(Object.keys(gameData[0]))
         // console.log(Object.keys(gameData[0].screenshots[0].url))
         // console.log(gameData[0].screenshots[0].url)
         console.log(gameData)

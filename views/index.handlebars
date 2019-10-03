@@ -1,11 +1,11 @@
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
 <div class="site-content">
   <div class="container">
     <div class="row">
       <div class="col-8 offset-2">
 
-        <div class="bg"></div>
-        <div class="bg bg2"></div>
-        <div class="bg bg3"></div>
         {{!-- <h1>{{msg}}</h1> --}}
         {{!-- <h2>This is our Home Page!</h2> --}}
         {{!-- <form class="clearfix mb-4" action="POST">
@@ -19,24 +19,40 @@
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form> --}}
-        <h3>You Matched With:</h3>
+        {{!-- <h3>You Matched With:</h3> --}}
+
+
         <ul id="example-list" class="list-group">
           {{#each games}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <h2 id="gameName">{{name}}</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-5">
+                  <h3 id="gameName">{{name}}</h3>
 
-            <img class="gameImage" src="https:{{cover.url}}"
-              alt="https://steamuserimages-a.akamaihd.net/ugc/1136285831726016610/8ABCD19214B516DCD4E351E241C969C6A0C8F9D8/">
-            <div></div>
-            <span>Time to Beat: {{time_to_beat}}</span>
-            {{!-- <a href="example/{{this.id}}">{{this.name}}</a> --}}
-            <h4>Genres: {{genres.0.slug}} {{genres.1.slug}}</h4>
-            {{#each platforms}}
-            <span>{{slug}}</span>
-            {{/each}}
-            <p>Rating: {{total_rating}}</p>
-            <h5>Summary: {{summary}}</h5>
-            <button class="btn btn-primary float-right save">Save To Preferences</button>
+                  <img class="gameImage" src="https:{{cover.url}}"
+                    alt="https://steamuserimages-a.akamaihd.net/ugc/1136285831726016610/8ABCD19214B516DCD4E351E241C969C6A0C8F9D8/">
+                  <div></div>
+                  <p>Time to Beat: <i>{{time_to_beat}}</i></p>
+                  {{!-- <a href="example/{{this.id}}">{{this.name}}</a> --}}
+
+                  <p>Genres: <i>{{genres.0.slug}} {{genres.1.slug}}</i></p>
+                  {{!-- <h5>Platforms:</h5> --}}
+
+                  <span>Platforms:</span>
+                  {{#each platforms}}
+                  <span><i>{{slug}}</i><span>
+                      {{/each}}
+                      <p>Rating: <i>{{total_rating}}</i></p>
+
+                </div>
+                <div class="col-7">
+                  <h4 style="font-size: 30px; font-weight: bold;">Summary: </h4>
+                  <h5 style="overflow: auto; height: 268px; font-size: 1.3rem;">{{summary}}</h5>
+                  <button id="add-to-preferences-btn">Save to Preferences</button>
+                </div>
+              </div>
+            </div>
           </li>
           {{/each}}
         </ul>
