@@ -111,8 +111,18 @@ $(document).ready(function () {
         savedGameId: event.target.id
       }
   
-    }).then(res => {
-  
+    }).then((res) => {
+      console.log("boogaloo")
+      // console.log(res.status)
+      console.log(res)
+      // console.log(Object.keys(res))
+
+      if (res == "loginPrompt") {
+        window.location.href = "/preferences"
+      }
+
+    }).catch(err => {
+       console.log(err)
     })
 
 

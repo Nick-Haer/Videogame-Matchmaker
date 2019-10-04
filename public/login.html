@@ -52,7 +52,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2>Log In</h2>
+                    <h2 id="logInTitle">Log In</h2>
                     <form>
                         <div class="form-group">
                             <label for="loginEmail">Email address</label>
@@ -85,7 +85,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2>Sign Up</h2>
+                    <h2 id="signUpTitle">Sign Up</h2>
                     <form>
                         <div class="row">
                             <div class="col">
@@ -126,6 +126,16 @@
                 $("#login-content").hide();
                 $("#signup-content").show();
             })
+
+            $("#signup-btn").on("click", function () {
+                $("#signUpTitle").text("Thanks for Signing Up! Now please login")
+            })
+
+            $("#login-btn").on("click", function () {
+                $("#logInTitle").text("Thanks for logging in! Now you can save games!")
+            })
+
+
         })
     </script>
     <script src="./js/index.js"></script>

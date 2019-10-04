@@ -231,6 +231,8 @@ module.exports = function (app) {
         console.log(data)
       })
     } else {
+      console.log("reached else condition")
+      res.json("loginPrompt")
       // res.render("singInPrompt")
     }
   })
