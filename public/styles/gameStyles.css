@@ -67,6 +67,7 @@
      width: 45px;
      height: 45px;
      border: solid rgb(136, 40, 40);
+     margin-left: 12%;
    }
    .gameImage {
     width: 150px;
@@ -95,6 +96,42 @@
    .info{
     font-size: x-large;
    }
+
+   #navbarNav {
+    margin-left: 37%;
+  }
+  .siteTitle {
+    font-size: 2.25rem;
+      margin-left: 2%;
+      margin-right: 34%;
+      font-family: 'Grenze', serif;
+  }
+  a{
+    color: brown;
+    margin-left: 2%;
+  }
+
+  .signPromptRow {
+      text-align: center;
+      font-family: 'Grenze', serif;
+      color: whitesmoke;
+  }
+
+  #promptLogin {
+      margin-top: 3%;
+      margin-right: 2%;
+      display: inline-block;
+      color: whitesmoke;
+      font-size: 2rem;
+      opacity: .8;
+      background-image: linear-gradient(blue, brown);
+      width: 50%;
+  }
+
+  #signPrompt {
+      /* background-color: rgba(255, 255, 255, 0.781); */
+      opacity: .8;
+  }
 
 
 
