@@ -231,7 +231,7 @@ module.exports = function (app) {
         console.log(data)
       })
     } else {
-      res.json("faaiiiiilure")
+      res.json("placeholder for handlebars")
     }
   })
 
