@@ -1,4 +1,5 @@
 var db = require("../models");
+const axios = require("axios")
 
 module.exports = function(app) {
   // Load index page
@@ -27,6 +28,91 @@ module.exports = function(app) {
 
 
   // Load example page and pass in an example by id
+  // app.get("/example/:id", function(req, res) {
+  //   db.Example.findOne({ where: { id: req.params.id } }).then(function(
+  //     dbExample
+  //   ) {
+  //     res.render("example", {
+  //       example: dbExample
+  //     });
+  //   });
+  // });
+
+
+
+  app.get("/preferences", (req, res) => {
+
+
+
+  if (req.user) {
+
+
+
+    console.log(Object.keys(req.user))
+
+    db.games.findAll({
+      attributes: ["id_from_database"],
+      where: {
+        userId: req.user.id
+      }
+      // include: [db.users]
+  }).then((data) => {
+    console.log(data)
+
+
+
+
+    let queryStringAdditions = ``
+    for (let i = 0; i < data.length; i++) {
+      let gameId = data[i].dataValues.id_from_database
+
+      if (i !== 0) {
+        queryStringAdditions +=` | `
+      }
+      queryStringAdditions += `id=${gameId}`
+
+    }
+
+    console.log(queryStringAdditions)
+
+    axios({
+      url: "https://api-v3.igdb.com/games",
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'user-key': process.env.API_KEY
+      },
+      data: `fields name, screenshots.*, summary, platforms.slug, total_rating, cover.*, genres.slug, time_to_beat; where ${queryStringAdditions};` 
+    })
+      .then(response => {
+
+        gameData = response.data
+        console.log(gameData)
+        res.status(200).render("preferences", {
+          games: gameData
+        }
+        )
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+
+
+
+  })
+  
+  } else {
+    // res.render()
+  }
+
+
+
+    
+
+
+  })
+
   app.get("/example/:id", function(req, res) {
     db.Example.findOne({ where: { id: req.params.id } }).then(function(
       dbExample

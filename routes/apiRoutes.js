@@ -55,7 +55,8 @@ module.exports = function (app) {
       lastName: req.body.last
     })
       .then(() => {
-        res.redirect(307, "/api/loginPage");
+        // res.redirect(307, "/api/loginPage");
+
       })
       .catch((err) => {
         res.status(401).json(err);
@@ -65,7 +66,6 @@ module.exports = function (app) {
   //post for pick a reference
 
   app.get("/api/gamesDisplay", function (req, res) {
-
 
 
     for (let game of gameData) {
@@ -89,7 +89,7 @@ module.exports = function (app) {
 
   app.get("/api/games", function (req, res) {
     // console.log(req.query);
-
+    console.log(req.user);
     let { time, rating, released_date, multiplayer, genre } = req.query;
 
     // console.log(multiplayer)
@@ -125,37 +125,6 @@ module.exports = function (app) {
     let [genreOne, genreTwo, genreThree] = genre.split(", ");
 
     console.log(genreOne)
-
-    // switch (genre) {
-    //   case "strategy":
-    //     genreId = 15
-
-    //     break;
-    //   case "sport":
-    //     genreId = 14
-
-    //     break;
-    //   case "puzzle":
-    //     genreId = 9
-
-    //     break;
-    //   case "adventure":
-    //     genreId = 31
-
-    //     break;
-    //   case "indie":
-    //     genreId = 32
-
-    //     break;
-    //   case "rpg":
-    //     genreId = 12
-
-    //     break;
-    //   case "shooter":
-    //     genreId = 5
-
-    //     break;
-    // }
 
 
     switch (time) {
@@ -226,20 +195,8 @@ module.exports = function (app) {
       .then(response => {
 
         gameData = response.data
+        // console.log(gameData)
 
-        // console.log(Object.keys(gameData[0]))
-        // console.log(Object.keys(gameData[0].screenshots[0].url))
-        // console.log(gameData[0].screenshots[0].url)
-        console.log(gameData)
-
-        // console.log(Object.keys(response))
-        // console.log(response.data)
-
-
-        // res.render("index",
-        // {
-        //   games: data
-        // })
         res.status(200).end()
         // res.json(response.data);
       })
@@ -252,6 +209,31 @@ module.exports = function (app) {
     //   res.json(dbExample);
     // });
   });
+
+
+
+  app.post("/api/preferences", (req, res) => {
+
+
+    console.log(req.body.id_from_database)
+    console.log(req.user)
+    console.log("path")
+
+
+    if(req.user) {
+
+      console.log("logged in")
+      db.games.create({
+        userId: req.user.id,
+        id_from_database: req.body.savedGameId
+      }).then((data) => {
+        res.status(200).json(data)
+        console.log(data)
+      })
+    } else {
+      res.json("placeholder for handlebars")
+    }
+  })
 
   // Delete an example by id
   app.delete("/api/examples/:id", function (req, res) {

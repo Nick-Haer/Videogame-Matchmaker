@@ -11,10 +11,9 @@ $(document).ready(function () {
 
   event.preventDefault()
 
-  console.log("electric")
+  // console.log("electric")
 
 
-  function signUpUser(email, password, first, last) {
   $.post("/api/createAccount", {
     email: $("#signUpEmail").val().trim(),
     password: $("#signUpPassword").val().trim(),
@@ -22,7 +21,7 @@ $(document).ready(function () {
     last: $("#last-name-input").val().trim()
   })
     .then(response => {
-      // window.location.reload();
+      window.location.reload();
       alert("Access Granted! You may proceed to login")
       console.log(response)
       // console.log("ajax")
@@ -34,9 +33,27 @@ $(document).ready(function () {
     .catch(err => {
       throw err;
     })
-  }
+  
 
-  signUpUser()
+  })
+
+  $("#login-btn").on("click", function(event){
+    event.preventDefault()
+
+    $.post("/api/loginPage", {
+      email: $("#loginEmail").val().trim(),
+      password: $("#loginPassword").val().trim()
+    }).then(function(){
+      console.log("gotem")
+      // $(".loginTab").text("Signed In")
+      // window.location.replace("/");
+
+        // If there's an error, log the error
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    
   })
 
   $("#submit-btn").on("click", function () {
@@ -77,7 +94,34 @@ $(document).ready(function () {
 
   })
 
+  $(".preferGame").on("click", (event) => {
 
+    event.preventDefault()
+
+    // console.log(event.target.id)
+
+
+
+    console.log("clicked")
+
+    $.ajax({
+      method: "POST",
+      url: "/api/preferences",
+      data: {
+        savedGameId: event.target.id
+      }
+  
+    }).then(res => {
+  
+    })
+
+
+
+
+
+  })
+
+  
 
 
 })
