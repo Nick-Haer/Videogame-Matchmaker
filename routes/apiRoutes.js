@@ -40,7 +40,7 @@ module.exports = function (app) {
   // window.location.query
 
   app.post("/api/loginPage", passport.authenticate("local"), function(req, res) {
-    res.json(req.user);
+    res.status(200).end()
   });
 
 
@@ -231,7 +231,7 @@ module.exports = function (app) {
         console.log(data)
       })
     } else {
-      res.json("placeholder for handlebars")
+      // res.render("singInPrompt")
     }
   })
 
