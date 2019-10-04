@@ -66,10 +66,15 @@ module.exports = function(app) {
     for (let i = 0; i < data.length; i++) {
       let gameId = data[i].dataValues.id_from_database
 
-      if (i !== 0) {
-        queryStringAdditions +=` | `
+      if (!duplicateCheck.includes(gameId)) {
+        duplicateCheck.push(gameId)
+
+        if (i !== 0) {
+          queryStringAdditions +=` | `
+        }
+        queryStringAdditions += `id=${gameId}`
+  
       }
-      queryStringAdditions += `id=${gameId}`
 
     }
 
