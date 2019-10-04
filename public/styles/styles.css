@@ -142,6 +142,39 @@ h1 {
 }
 .siteTitle {
   font-size: 2.25rem;
-  margin-left: 2%;
-  font-family: 'Grenze', serif;
+    margin-left: 2%;
+    margin-right: 34%;
+    font-family: 'Grenze', serif;
+}
+a{
+  color: brown;
+  margin-left: 3%;
+}
+
+@media only screen and (max-width: 768px) {
+  .selection{
+    width: 100%;
+  }
+  #login-content{
+    width: 87%;
+  }
+  #signup-content{
+    width: 87%;
+  }
+  .card{
+    margin: 10px;
+  }
+}
+@media screen and (max-width: 450px) {
+  #submit-btn{
+    width: 42%;
+  }
+  #login-btn, #go-to-signup-btn, #signup-btn{
+    width: 26%;
+
+   }
+   .cards{
+     display: initial;
+   }
+   
 }
