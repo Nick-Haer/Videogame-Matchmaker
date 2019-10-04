@@ -237,6 +237,16 @@ module.exports = function (app) {
     }
   })
 
+
+  app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
+  });
+
+
+
+
+
   // Delete an example by id
   app.delete("/api/examples/:id", function (req, res) {
     db.Example.destroy({ where: { id: req.params.id } }).then(function (
