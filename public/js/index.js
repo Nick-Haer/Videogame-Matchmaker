@@ -11,7 +11,7 @@ $(document).ready(function () {
 
   event.preventDefault()
 
-  console.log("electric")
+  // console.log("electric")
 
 
   $.post("/api/createAccount", {
@@ -22,7 +22,7 @@ $(document).ready(function () {
   })
     .then(response => {
       window.location.reload();
-      console.log("Access Granted! You may proceed to login")
+      alert("Access Granted! You may proceed to login")
       console.log(response)
       // console.log("ajax")
 
@@ -44,7 +44,10 @@ $(document).ready(function () {
       email: $("#loginEmail").val().trim(),
       password: $("#loginPassword").val().trim()
     }).then(function(){
-      window.location.replace("/");
+      console.log("gotem")
+      // $(".loginTab").text("Signed In")
+      // window.location.replace("/");
+
         // If there's an error, log the error
       })
       .catch(function(err) {
@@ -91,7 +94,7 @@ $(document).ready(function () {
 
   })
 
-
+  $.post()
 
 
 })
