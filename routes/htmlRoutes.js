@@ -61,7 +61,7 @@ module.exports = function(app) {
 
 
 
-
+    let duplicateCheck = [];
     let queryStringAdditions = ``
     for (let i = 0; i < data.length; i++) {
       let gameId = data[i].dataValues.id_from_database
