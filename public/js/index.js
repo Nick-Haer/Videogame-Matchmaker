@@ -94,7 +94,34 @@ $(document).ready(function () {
 
   })
 
-  $.post()
+  $(".preferGame").on("click", (event) => {
+
+    event.preventDefault()
+
+    // console.log(event.target.id)
+
+
+
+    console.log("clicked")
+
+    $.ajax({
+      method: "POST",
+      url: "/api/preferences",
+      data: {
+        savedGameId: event.target.id
+      }
+  
+    }).then(res => {
+  
+    })
+
+
+
+
+
+  })
+
+  
 
 
 })

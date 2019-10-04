@@ -88,7 +88,7 @@ module.exports = function(app) {
 
         gameData = response.data
         console.log(gameData)
-        res.status(200).render("index", {
+        res.status(200).render("preferences", {
           games: gameData
         }
         )

@@ -77,7 +77,7 @@
     display: inline-block;
    }
 
-   #add-to-preferences-btn{
+   .add-to-preferences-btn{
     width: 13%;
   border: solid black;
   padding: 0.5%;
@@ -88,7 +88,7 @@
 
 }
    
-   #add-to-preferences-btn:hover{
+   .add-to-preferences-btn:hover{
     background-image: linear-gradient(blue, black);
     color: white;
 

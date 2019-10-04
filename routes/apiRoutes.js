@@ -126,37 +126,6 @@ module.exports = function (app) {
 
     console.log(genreOne)
 
-    // switch (genre) {
-    //   case "strategy":
-    //     genreId = 15
-
-    //     break;
-    //   case "sport":
-    //     genreId = 14
-
-    //     break;
-    //   case "puzzle":
-    //     genreId = 9
-
-    //     break;
-    //   case "adventure":
-    //     genreId = 31
-
-    //     break;
-    //   case "indie":
-    //     genreId = 32
-
-    //     break;
-    //   case "rpg":
-    //     genreId = 12
-
-    //     break;
-    //   case "shooter":
-    //     genreId = 5
-
-    //     break;
-    // }
-
 
     switch (time) {
       case "short":
@@ -226,20 +195,8 @@ module.exports = function (app) {
       .then(response => {
 
         gameData = response.data
+        // console.log(gameData)
 
-        // console.log(Object.keys(gameData[0]))
-        // console.log(Object.keys(gameData[0].screenshots[0].url))
-        // console.log(gameData[0].screenshots[0].url)
-        console.log(gameData)
-
-        // console.log(Object.keys(response))
-        // console.log(response.data)
-
-
-        // res.render("index",
-        // {
-        //   games: data
-        // })
         res.status(200).end()
         // res.json(response.data);
       })
@@ -252,6 +209,31 @@ module.exports = function (app) {
     //   res.json(dbExample);
     // });
   });
+
+
+
+  app.post("/api/preferences", (req, res) => {
+
+
+    console.log(req.body.id_from_database)
+    console.log(req.user)
+    console.log("path")
+
+
+    if(req.user) {
+
+      console.log("logged in")
+      db.games.create({
+        userId: req.user.id,
+        id_from_database: req.body.savedGameId
+      }).then((data) => {
+        res.status(200).json(data)
+        console.log(data)
+      })
+    } else {
+      res.json("faaiiiiilure")
+    }
+  })
 
   // Delete an example by id
   app.delete("/api/examples/:id", function (req, res) {
