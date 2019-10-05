@@ -44,3 +44,5 @@ module.exports = function(sequelize, DataTypes) {
   });
   return Users;
 };
+
+//the users table is initialized here. This table has a one to many relationship with each game the user chooses to save to preferences.

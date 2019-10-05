@@ -16,3 +16,5 @@ module.exports = function(sequelize, DataTypes) {
   });
   return Games;
 };
+
+//Creating the table that will hold the id of all games a user chooses to add to preferences. The inserted id will be used to query the IGDB api, and populate the page with preferred games

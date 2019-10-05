@@ -2,51 +2,29 @@ const db = require("../models");
 const passport = require("../config/passport");
 const axios = require("axios")
 
-console.log(db.sequelize)
-console.log(Object.keys(db))
+//Initializing variables
+
 
 
 let gameData;
 
+//Initializing gameData, a variable that will later hold the data sent back from the IGDB API. It is declared globally so two different routes can use it.
+
 module.exports = function (app) {
-  // Get all examples
-  app.get("/api/examples", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
-      res.json(dbExamples);
-    }
 
-    );
-  }
-  );
 
-  // app.get('/x/y')
+  //This request handler is used to authenticate a user's password and email when they login. It creates a user object that is then attached to each request.
 
-  // $.ajax({
-  //   method: 'GET',
-  //   url: '/api/games'
-  //   data: {
-  //     rating: $('#ratingInput').val().trim()
-  //   }
-  // })
-
-  // '/x' -> '/profile'
-
-  // '/y' -> '/profile?scroll=true'
-
-  // if (window.location.query.scroll) {
-  //   // scroll user somwhere
-  // }
-
-  // window.location.query
-
-  app.post("/api/loginPage", passport.authenticate("local"), function(req, res) {
+  app.post("/api/loginPage", passport.authenticate("local"), function (req, res) {
     res.status(200).end()
   });
 
 
-  
-  app.post("/api/createAccount", function(req, res) {
-    console.log(Object.keys(req.body))
+
+  //This request handler is used to create a user account.
+
+  app.post("/api/createAccount", function (req, res) {
+
 
     db.users.create({
       email: req.body.email,
@@ -55,7 +33,6 @@ module.exports = function (app) {
       lastName: req.body.last
     })
       .then(() => {
-        // res.redirect(307, "/api/loginPage");
 
       })
       .catch((err) => {
@@ -63,21 +40,23 @@ module.exports = function (app) {
       });
   });
 
-  //post for pick a reference
+  //This request uses the gameData vairable, which is declared globally, and stores the information from the IGDB api in an array, to send the data on games to results page, which is render in Handlebars. 
+
+  // The api returns dome data in weird ways, such as time to complete a game in minutes, and rating out to approx 10 decimal points. The loop within this request handker cleans that data up for presentation.
 
   app.get("/api/gamesDisplay", function (req, res) {
 
 
     for (let game of gameData) {
-      // console.log(game.total_rating)
-      let {total_rating} = game
-      // console.log(total_rating)
+
+      let { total_rating } = game
+
       let roundedRating = Math.round(total_rating)
-      game.total_rating = roundedRating 
+      game.total_rating = roundedRating
 
 
-      let {time_to_beat} = game;
-      let hoursToBeat = Math.round((time_to_beat / 60)).toString() +"hrs " + (time_to_beat % 60).toString() + "mins";
+      let { time_to_beat } = game;
+      let hoursToBeat = Math.round((time_to_beat / 60)).toString() + "hrs " + (time_to_beat % 60).toString() + "mins";
       game.time_to_beat = hoursToBeat;
     }
 
@@ -87,17 +66,14 @@ module.exports = function (app) {
 
   })
 
+
+  //this request handler receives the values sent in when the users complete their Rorschach tests. It then converts this data into style that the api will understand in its query filters. It then queries the api. The game data returned is then stored in gameData to be rendered by the request handler above. Laslty, The response of this request handler redirects to the route above.
+
   app.get("/api/games", function (req, res) {
-    // console.log(req.query);
+
     console.log(req.user);
     let { time, rating, released_date, multiplayer, genre } = req.query;
 
-    // console.log(multiplayer)
-
-
-    // console.log(multiplayerStatus)
-
-    let genreId = 0;
 
 
     let minMinsToComplete = 0;
@@ -114,9 +90,9 @@ module.exports = function (app) {
 
     let maxDate = 0;
 
-    //finding the correct genre id to use in the query
 
-    let multiplayerStatus = (multiplayer === "multi") ? "multiplayer" :  "single-player";
+
+    let multiplayerStatus = (multiplayer === "multi") ? "multiplayer" : "single-player";
 
     console.log(multiplayerStatus)
 
@@ -126,7 +102,7 @@ module.exports = function (app) {
 
     console.log(genreOne)
 
-
+//determining what constitutes a short/med/long game
     switch (time) {
       case "short":
         maxMinsToComplete = 500
@@ -143,6 +119,7 @@ module.exports = function (app) {
 
         break;
     }
+  //determining what constitutes a low/med/high rating for a game
     switch (rating) {
       case "low":
         maxRatingScore = 70;
@@ -157,6 +134,8 @@ module.exports = function (app) {
 
         break;
     }
+
+    //determining when an old, medium, and new game would be released, then converting it to unix time.
     switch (released_date) {
       case "old":
         minDate = new Date('1972.01.01').getTime() / 1000
@@ -175,14 +154,6 @@ module.exports = function (app) {
         break;
     }
 
-    console.log(minDate)
-    console.log(maxDate)
-
-    // release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & where rating > ${minRatingScore} & rating<= ${maxRatingScore} & time_to_beat> ${minMinsToComplete} & time_to_beat<= ${maxMinsToComplete} & multiplayer_modes.onlinecoop = ${multiplayerStatus} & genres = [${genreId}];
-
-    //screenshots.*
-
-    //solve by reducing options to two? or by reducing number of options
     axios({
       url: "https://api-v3.igdb.com/games",
       method: 'POST',
@@ -195,34 +166,25 @@ module.exports = function (app) {
       .then(response => {
 
         gameData = response.data
-        // console.log(gameData)
+
 
         res.status(200).end()
-        // res.json(response.data);
+
       })
       .catch(err => {
         console.error(err);
       });
 
-
-    // db.Example.create(req.body).then(function(dbExample) {
-    //   res.json(dbExample);
-    // });
   });
 
 
-
+//this request handler stores the id that identifies a game to the API within our mySQL database alongisde the id of the user (a foreign key) who preferred it.
   app.post("/api/preferences", (req, res) => {
 
 
-    console.log(req.body.id_from_database)
-    console.log(req.user)
-    console.log("path")
+    if (req.user) {
 
 
-    if(req.user) {
-
-      console.log("logged in")
       db.games.create({
         userId: req.user.id,
         id_from_database: req.body.savedGameId
@@ -233,26 +195,26 @@ module.exports = function (app) {
     } else {
       console.log("reached else condition")
       res.json("loginPrompt")
-      // res.render("singInPrompt")
+
     }
   })
 
-
-  app.get("/logout", function(req, res) {
+//this request handler logs out the user, and then redirects to the homepage.
+  app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
   });
 
 
-
-
-
-  // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function (
-      dbExample
-    ) {
-      res.json(dbExample);
-    });
-  });
 };
+
+  //A delete button would make a good future addition.
+
+  // app.delete("/api/examples/:id", function (req, res) {
+  //   db.Example.destroy({ where: { id: req.params.id } }).then(function (
+  //     dbExample
+  //   ) {
+  //     res.json(dbExample);
+  //   });
+  // });
+// };

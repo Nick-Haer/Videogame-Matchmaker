@@ -1,92 +1,73 @@
-// Get references to page elements
-// var $exampleText = $("#example-text");
-// var $exampleDescription = $("#example-description");
-// var $submitBtn = $("#submit");
-// var $exampleList = $("#example-list");
+
 
 $(document).ready(function () {
 
 
-  $("#signup-btn").on("click", function (event){
+  $("#signup-btn").on("click", function (event) {
 
-  event.preventDefault()
+    event.preventDefault()
 
-  // console.log("electric")
+    //On clicking the signup button, a post requst is sent to the api routes file, which then stores the users data in a mySQL database, creating an accoun.
 
 
-  $.post("/api/createAccount", {
-    email: $("#signUpEmail").val().trim(),
-    password: $("#signUpPassword").val().trim(),
-    first: $("#first-name-input").val().trim(),
-    last: $("#last-name-input").val().trim()
-  })
-    .then(response => {
-      window.location.reload();
-      alert("Access Granted! You may proceed to login")
-      console.log(response)
-      // console.log("ajax")
-
-      // response.redirect("/api/gameDisplay")
-
-  
+    $.post("/api/createAccount", {
+      email: $("#signUpEmail").val().trim(),
+      password: $("#signUpPassword").val().trim(),
+      first: $("#first-name-input").val().trim(),
+      last: $("#last-name-input").val().trim()
     })
-    .catch(err => {
-      throw err;
-    })
-  
+      .then(response => {
+        window.location.reload();
+        alert("Access Granted! You may proceed to login")
+        console.log(response)
+      })
+      .catch(err => {
+        throw err;
+      })
+
 
   })
 
-  $("#login-btn").on("click", function(event){
+  //This route is used for logging in, routing to a request handler found in the apiRoutes file. The passport middleware will run on the request, validating the users email and password.
+
+  $("#login-btn").on("click", function (event) {
     event.preventDefault()
 
     $.post("/api/loginPage", {
       email: $("#loginEmail").val().trim(),
       password: $("#loginPassword").val().trim()
-    }).then(function(){
-      console.log("gotem")
-      // $(".loginTab").text("Signed In")
-      // window.location.replace("/");
+    }).then(function () {
 
-        // If there's an error, log the error
-      })
-      .catch(function(err) {
+    })
+      .catch(function (err) {
         console.log(err);
       });
-    
+
   })
+
+  //This route is key to the app. When the user submits his rorsach tests, this route will send the values to a request handler in apiRoutes, which will then change it into a style the api can understand as filter parameters. This is what provides customized game results.
 
   $("#submit-btn").on("click", function () {
 
     event.preventDefault()
 
-    //data -id
-
-    // localStorage.setItem('firstGame', ($("#name").val().trim()));
-
-    // post request to save to file
-
-
 
     $.ajax({
       method: "GET",
       url: "/api/games",
-      data: { 
-      time: $("#time").val(),
-      rating: $("#rating").val(),
-      released_date: $("#released_date").val(),
-      multiplayer: $("#multiplayer").val(),
-      genre: $("#genre").val(),
+      data: {
+        time: $("#time").val(),
+        rating: $("#rating").val(),
+        released_date: $("#released_date").val(),
+        multiplayer: $("#multiplayer").val(),
+        genre: $("#genre").val(),
       }
     })
       .then(response => {
         window.location.href = "/api/gamesDisplay"
         console.log(response)
-        // console.log("ajax")
 
-        // response.redirect("/api/gameDisplay")
 
-    
       })
       .catch(err => {
         throw err;
@@ -94,13 +75,11 @@ $(document).ready(function () {
 
   })
 
+  //This route is triggered whenever a user clicks the botton to save a game as preferred. It extracts the game's id, which is used to query that game in the Api's database. A request handler in apiRoutes will then store this data in our mysql database, for later use when rendering the preferences page.
+
   $(".preferGame").on("click", (event) => {
 
     event.preventDefault()
-
-    // console.log(event.target.id)
-
-
 
     console.log("clicked")
 
@@ -110,129 +89,19 @@ $(document).ready(function () {
       data: {
         savedGameId: event.target.id
       }
-  
+
     }).then((res) => {
-      console.log("boogaloo")
-      // console.log(res.status)
-      console.log(res)
-      // console.log(Object.keys(res))
 
       if (res == "loginPrompt") {
         window.location.href = "/preferences"
       }
 
     }).catch(err => {
-       console.log(err)
+      console.log(err)
     })
-
-
-
 
 
   })
 
   
-
-
 })
-
-
-
-
-
-
-
-
-// The API object contains methods for each kind of request we'll make
-// var API = {
-//   saveExample: function(example) {
-//     return $.ajax({
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       type: "POST",
-//       url: "api/examples",
-//       data: JSON.stringify(example)
-//     });
-//   },
-//   getExamples: function() {
-//     return $.ajax({
-//       url: "api/examples",
-//       type: "GET"
-//     });
-//   },
-//   deleteExample: function(id) {
-//     return $.ajax({
-//       url: "api/examples/" + id,
-//       type: "DELETE"
-//     });
-//   }
-// };
-
-// // refreshExamples gets new examples from the db and repopulates the list
-// var refreshExamples = function() {
-//   API.getExamples().then(function(data) {
-//     var $examples = data.map(function(example) {
-//       var $a = $("<a>")
-//         .text(example.text)
-//         .attr("href", "/example/" + example.id);
-
-//       var $li = $("<li>")
-//         .attr({
-//           class: "list-group-item",
-//           "data-id": example.id
-//         })
-//         .append($a);
-
-//       var $button = $("<button>")
-//         .addClass("btn btn-danger float-right delete")
-//         .text("ｘ");
-
-//       $li.append($button);
-
-//       return $li;
-//     });
-
-//     $exampleList.empty();
-//     $exampleList.append($examples);
-//   });
-// };
-
-// // handleFormSubmit is called whenever we submit a new example
-// // Save the new example to the db and refresh the list
-// var handleFormSubmit = function(event) {
-//   event.preventDefault();
-
-//   var example = {
-//     text: $exampleText.val().trim(),
-//     description: $exampleDescription.val().trim()
-//   };
-
-//   if (!(example.text && example.description)) {
-//     alert("You must enter an example text and description!");
-//     return;
-//   }
-
-//   API.saveExample(example).then(function() {
-//     refreshExamples();
-//   });
-
-//   $exampleText.val("");
-//   $exampleDescription.val("");
-// };
-
-// // handleDeleteBtnClick is called when an example's delete button is clicked
-// // Remove the example from the db and refresh the list
-// var handleDeleteBtnClick = function() {
-//   var idToDelete = $(this)
-//     .parent()
-//     .attr("data-id");
-
-//   API.deleteExample(idToDelete).then(function() {
-//     refreshExamples();
-//   });
-// };
-
-// // Add event listeners to the submit and delete buttons
-// $submitBtn.on("click", handleFormSubmit);
-// $exampleList.on("click", ".delete", handleDeleteBtnClick);
