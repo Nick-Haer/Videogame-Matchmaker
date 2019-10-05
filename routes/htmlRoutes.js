@@ -2,65 +2,24 @@ var db = require("../models");
 const axios = require("axios")
 
 module.exports = function(app) {
-  // Load index page
-  app.get("/", function(req, res) {
-    res.json("hello")
-    // db.Example.findAll({}).then(function(dbExamples) {
-    //   res.render("index", {
-    //     msg: "Welcome!",
-    //     examples: dbExamples
-    //   });
-    // }
-    // );
-  });
 
 
-
-  //get games I matched with
-
-  //get contact us
-
-  //get about us
-
-  //get preferences
-
-  //sign-in
-
-
-  // Load example page and pass in an example by id
-  // app.get("/example/:id", function(req, res) {
-  //   db.Example.findOne({ where: { id: req.params.id } }).then(function(
-  //     dbExample
-  //   ) {
-  //     res.render("example", {
-  //       example: dbExample
-  //     });
-  //   });
-  // });
-
-
+  //this request handler checks to see if a user is logged in by checking for req.user. If they are logged in, it will query all games that player has stored, using the user's id.
 
   app.get("/preferences", (req, res) => {
 
-
-
   if (req.user) {
-
-
-
-    console.log(Object.keys(req.user))
 
     db.games.findAll({
       attributes: ["id_from_database"],
       where: {
         userId: req.user.id
       }
-      // include: [db.users]
   }).then((data) => {
     console.log(data)
 
-
-
+//If a user accidentally prefers a game twice, then a check against duplicates array will keep the game from being queried twice, possibly breaking the api query.
+//The loop below creates a query string to query for games from the IGDB by id.
     let duplicateCheck = [];
     let queryStringAdditions = ``
     for (let i = 0; i < data.length; i++) {
@@ -92,7 +51,23 @@ module.exports = function(app) {
       .then(response => {
 
         gameData = response.data
-        console.log(gameData)
+
+        //prettying up the data for presentation, as follows the api query results in apiRoutes as well.
+
+
+        for (let game of gameData) {
+          let {total_rating} = game
+
+          let roundedRating = Math.round(total_rating)
+          game.total_rating = roundedRating 
+    
+    
+          let {time_to_beat} = game;
+          let hoursToBeat = Math.round((time_to_beat / 60)).toString() +"hrs " + (time_to_beat % 60).toString() + "mins";
+          game.time_to_beat = hoursToBeat;
+        }
+
+
         res.status(200).render("preferences", {
           games: gameData
         }
@@ -106,27 +81,26 @@ module.exports = function(app) {
 
 
   })
+
+  //if the user is not signed in, a a handlebars prompt is rendered instead, prompting them to do so.
   
   } else {
     res.render("signInPrompt")
   }
 
-
-
-    
-
-
   })
 
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.render("example", {
-        example: dbExample
-      });
-    });
-  });
+  //kept to reference for a potential future addition for providing more specific information about a game.
+
+  // app.get("/example/:id", function(req, res) {
+  //   db.Example.findOne({ where: { id: req.params.id } }).then(function(
+  //     dbExample
+  //   ) {
+  //     res.render("example", {
+  //       example: dbExample
+  //     });
+  //   });
+  // });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
