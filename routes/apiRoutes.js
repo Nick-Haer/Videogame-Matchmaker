@@ -45,24 +45,35 @@ module.exports = function (app) {
   // The api returns dome data in weird ways, such as time to complete a game in minutes, and rating out to approx 10 decimal points. The loop within this request handker cleans that data up for presentation.
 
   app.get("/api/gamesDisplay", function (req, res) {
+    console.log(gameData)
 
-
-    for (let game of gameData) {
-
-      let { total_rating } = game
-
-      let roundedRating = Math.round(total_rating)
-      game.total_rating = roundedRating
-
-
-      let { time_to_beat } = game;
-      let hoursToBeat = Math.round((time_to_beat / 60)).toString() + "hrs " + (time_to_beat % 60).toString() + "mins";
-      game.time_to_beat = hoursToBeat;
+    if (gameData.length === 0){
+      res.render("noGames")
     }
 
-    res.render("index", {
-      games: gameData
-    })
+
+    if(gameData.length !== 0) {
+
+      for (let game of gameData) {
+
+        let { total_rating } = game
+  
+        let roundedRating = Math.round(total_rating)
+        game.total_rating = roundedRating
+  
+  
+        let { time_to_beat } = game;
+        let hoursToBeat = Math.round((time_to_beat / 60)).toString() + "hrs " + (time_to_beat % 60).toString() + "mins";
+        game.time_to_beat = hoursToBeat;
+      }
+  
+      res.render("index", {
+        games: gameData
+      })
+
+    } 
+
+
 
   })
 
@@ -105,16 +116,16 @@ module.exports = function (app) {
 //determining what constitutes a short/med/long game
     switch (time) {
       case "short":
-        maxMinsToComplete = 500
+        maxMinsToComplete = 1000;
 
         break;
       case "medium":
-        minMinsToComplete = 500;
-        maxMinsToComplete = 1250
+        minMinsToComplete = 1000;
+        maxMinsToComplete = 1750
 
         break;
       case "long":
-        minMinsToComplete = 1250;
+        minMinsToComplete = 1750;
         maxMinsToComplete = 99999;
 
         break;
@@ -122,14 +133,14 @@ module.exports = function (app) {
   //determining what constitutes a low/med/high rating for a game
     switch (rating) {
       case "low":
-        maxRatingScore = 70;
+        maxRatingScore = 80;
         break;
       case "medium":
-        minRatingScore = 70;
-        maxRatingScore = 85;
+        minRatingScore = 80;
+        maxRatingScore = 86;
         break;
       case "high":
-        minRatingScore = 85;
+        minRatingScore = 86;
         maxRatingScore = 100;
 
         break;
@@ -139,16 +150,16 @@ module.exports = function (app) {
     switch (released_date) {
       case "old":
         minDate = new Date('1972.01.01').getTime() / 1000
-        maxDate = new Date('2000.01.01').getTime() / 1000
+        maxDate = new Date('2010.01.01').getTime() / 1000
         break;
       case "medium":
-        minDate = new Date('2000.01.01').getTime() / 1000
-        maxDate = new Date('2010.01.01').getTime() / 1000
+        minDate = new Date('2010.01.01').getTime() / 1000
+        maxDate = new Date('2016.01.01').getTime() / 1000
         console.log("gotem")
 
         break;
       case "new":
-        minDate = new Date('2010.01.01').getTime() / 1000
+        minDate = new Date('2016.01.01').getTime() / 1000
         maxDate = new Date('2019.06.01').getTime() / 1000
 
         break;
