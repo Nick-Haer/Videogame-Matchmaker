@@ -28,9 +28,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     createdAt: DataTypes.DATE
   });
-  Users.associate = (models) =>{
-    Users.hasMany(models.games)
-  }
+  Users.associate = models => {
+    Users.hasMany(models.games);
+  };
 
   Users.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
