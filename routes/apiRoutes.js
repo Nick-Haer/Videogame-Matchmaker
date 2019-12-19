@@ -27,6 +27,8 @@ module.exports = function (app) {
 
 
     db.users.create({
+
+      
       email: req.body.email,
       password: req.body.password,
       firstName: req.body.first,
@@ -212,6 +214,13 @@ module.exports = function (app) {
 
 //this request handler logs out the user, and then redirects to the homepage.
   app.get("/logout", function (req, res) {
+
+    // console.log(Object.keys(req))
+    // console.log(req.params)
+    // console.log(req.socket)
+    console.log(req.headers)
+    // console.log(req.rawheaders)
+    // console.log(Object.keys(res))
     req.logout();
     res.redirect("/");
   });
