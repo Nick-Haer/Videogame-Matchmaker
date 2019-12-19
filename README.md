@@ -6,7 +6,7 @@
 
 ## Overview
 
-This offbeat app helps users match with new video games by using the results of a series of Rorschach tests. The results from the tests are transformed into a list of games from the IGDB game database. Users can also create accounts/login, and save the games they clicked with to come back to later.
+This fun offbeat app helps users match with new video games by using the results of a series of Rorschach tests. The results from the tests are transformed into a list of games from the IGDB game database. Users can also create accounts/login, and save the games they clicked with to come back to later.
 
 Check out this project deployed to heroku [here](https://next-venture.herokuapp.com/)
 
