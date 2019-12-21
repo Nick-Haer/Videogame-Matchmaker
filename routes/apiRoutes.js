@@ -22,6 +22,7 @@ module.exports = function(app) {
 
   //This request handler is used to create a user account.
 
+
   app.post("/api/createAccount", function(req, res) {
     db.users
       .create({
@@ -186,8 +187,10 @@ module.exports = function(app) {
     }
   });
 
+
   //this request handler logs out the user, and then redirects to the homepage.
   app.get("/logout", function(req, res) {
+
     req.logout();
     res.redirect("/");
   });
