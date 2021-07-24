@@ -48,6 +48,7 @@ $(document).ready(function() {
   //This route is key to the app. When the user submits his rorsach tests, this route will send the values to a request handler in apiRoutes, which will then change it into a style the api can understand as filter parameters. This is what provides customized game results.
 
   $("#submit-btn").on("click", function() {
+    console.log("hit");
     event.preventDefault();
 
     $.ajax({

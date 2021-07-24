@@ -73,12 +73,13 @@ module.exports = function(app) {
   //this request handler receives the values sent in when the users complete their Rorschach tests. It then converts this data into style that the api will understand in its query filters. It then queries the api. The game data returned is then stored in gameData to be rendered by the request handler above. Laslty, The response of this request handler redirects to the route above.
 
   app.get("/api/games", function(req, res) {
+
     console.log(req.user);
     let { time, rating, released_date, multiplayer, genre } = req.query;
 
-    let minMinsToComplete = 0;
+    // let minMinsToComplete = 0;
 
-    let maxMinsToComplete = 0;
+    // let maxMinsToComplete = 0;
 
     let minRatingScore = 0;
 
@@ -140,8 +141,6 @@ module.exports = function(app) {
     case "medium":
       minDate = new Date("2010.01.01").getTime() / 1000;
       maxDate = new Date("2016.01.01").getTime() / 1000;
-      console.log("gotem");
-
       break;
     case "new":
       minDate = new Date("2016.01.01").getTime() / 1000;
@@ -150,21 +149,30 @@ module.exports = function(app) {
       break;
     }
 
+    console.log(process.env.API_KEY, "key");
+
+    const data = `fields name, screenshots.*, summary, platforms.slug, total_rating, cover.*, genres.slug, category; where (release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & game_modes.slug = "${multiplayerStatus}") & (genres.slug = "${genreOne}" | genres.slug = "${genreTwo}" | genres.slug = "${genreThree}"); sort popularity desc;`;
+    console.log(data);
+
     axios({
-      url: "https://api-v3.igdb.com/games",
+      url: "https://api.igdb.com/v4/games",
       method: "POST",
       headers: {
         Accept: "application/json",
-        "user-key": process.env.API_KEY
+        // "user-key": process.env.API_KEY
+        "Client-ID": "t0vxm7u1khhtetef2hktim3rz88j3d",
+        "Authorization": "Bearer uo8avsfdtwe0dawtd9jkc5ybd9lgeu"
       },
-      data: `fields name, screenshots.*, summary, platforms.slug, total_rating, cover.*, genres.slug, time_to_beat; where (release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & time_to_beat> ${minMinsToComplete} & time_to_beat<= ${maxMinsToComplete} & game_modes.slug = "${multiplayerStatus}") & (genres.slug = "${genreOne}" | genres.slug = "${genreTwo}" | genres.slug = "${genreThree}"); sort popularity desc;`
+      data,
     })
       .then(response => {
+        console.log(response.data, "mine");
         gameData = response.data;
 
         res.status(200).end();
       })
       .catch(err => {
+        console.log("kapowmaboom");
         console.error(err);
       });
   });
