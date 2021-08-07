@@ -1,7 +1,7 @@
-var passport = require("passport");
-var LocalStrategy = require("passport-local").Strategy;
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
-var db = require("../models");
+const db = require("../models");
 
 //adding code to validate the password the user enters as a valid one, part of the password middleware.
 

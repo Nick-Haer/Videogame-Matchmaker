@@ -3,6 +3,9 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const axios = require("axios");
+require("dotenv").config();
+const auth = process.env.AUTHORIZATION;
+const clientID = process.env.CLIENT_ID;
 
 //Initializing variables
 
@@ -146,8 +149,8 @@ module.exports = function(app) {
       headers: {
         Accept: "application/json",
         // "user-key": process.env.API_KEY
-        "Client-ID": "t0vxm7u1khhtetef2hktim3rz88j3d",
-        "Authorization": "Bearer uo8avsfdtwe0dawtd9jkc5ybd9lgeu"
+        "Client-ID": clientID,
+        "Authorization": auth,
       },
       data,
     })
