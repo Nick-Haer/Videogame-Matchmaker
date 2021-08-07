@@ -15,8 +15,6 @@ module.exports = function(app) {
             userId: req.user.id
           }
         }).then((data) => {
-          console.log(data);
-
           //If a user accidentally prefers a game twice, then a check against duplicates array will keep the game from being queried twice, possibly breaking the api query.
           //The loop below creates a query string to query for games from the IGDB by id.
           let duplicateCheck = [];
@@ -33,8 +31,6 @@ module.exports = function(app) {
               queryStringAdditions += `id=${gameId}`;
             }
           }
-
-          console.log(queryStringAdditions);
 
           axios({
             url: "https://api-v3.igdb.com/games",
@@ -70,7 +66,7 @@ module.exports = function(app) {
             });
         })
         .catch(err => {
-          console.log(err);
+          console.error(err);
         });
 
 

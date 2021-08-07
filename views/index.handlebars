@@ -3,25 +3,13 @@
 <div class="bg bg3"></div>
 <div class="site-content">
   <div class="container">
+        <div class="signPromptRow row">
+        <div class="col-12">
+            <a class="btn btn-block" href="/" id="promptLogin">Click Here To Try Again</a>
+        </div>
+    </div>
     <div class="row">
       <div class="col-8 offset-2">
-
-        {{!-- <h1>{{msg}}</h1> --}}
-        {{!-- <h2>This is our Home Page!</h2> --}}
-        {{!-- <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form> --}}
-        {{!-- <h3>You Matched With:</h3> --}}
-
-
         <ul id="example-list" class="list-group">
           {{#each games}}
           <li data-id="{{this.id}}" class="list-group-item">
@@ -29,23 +17,16 @@
               <div class="row">
                 <div class="col-5">
                   <h3 id="gameName">{{name}}</h3>
-
                   <img class="gameImage" src="https:{{cover.url}}"
                     alt="https://steamuserimages-a.akamaihd.net/ugc/1136285831726016610/8ABCD19214B516DCD4E351E241C969C6A0C8F9D8/">
                   <div></div>
-                  <p>Time to Beat: <i>{{time_to_beat}}</i></p>
-                  {{!-- <a href="example/{{this.id}}">{{this.name}}</a> --}}
-
+                  <a href="example/{{this.id}}">{{this.name}}</a>
                   <p>Genres: <i>{{genres.0.slug}} {{genres.1.slug}}</i></p>
-
-                  {{!-- <h5>Platforms:</h5> --}}
-
                   <span>Platforms:</span>
                   {{#each platforms}}
                   <span><i>{{slug}}</i><span>
                       {{/each}}
                       <p>Rating: <i>{{total_rating}}</i></p>
-
                 </div>
                 <div class="col-7">
                   <h4 style="font-size: 30px; font-weight: bold;">Summary: </h4>

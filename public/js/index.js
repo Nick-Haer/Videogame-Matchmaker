@@ -18,10 +18,9 @@ $(document).ready(function() {
         .val()
         .trim()
     })
-      .then(response => {
+      .then(() => {
         window.location.reload();
         alert("Access Granted! You may proceed to login");
-        console.log(response);
       })
       .catch(err => {
         throw err;
@@ -41,21 +40,20 @@ $(document).ready(function() {
         .val()
         .trim()
     }).catch(function(err) {
-      console.log(err);
+      console.error(err);
     });
   });
 
   //This route is key to the app. When the user submits his rorsach tests, this route will send the values to a request handler in apiRoutes, which will then change it into a style the api can understand as filter parameters. This is what provides customized game results.
 
   $("#submit-btn").on("click", function() {
-    console.log("hit");
     event.preventDefault();
 
     $.ajax({
       method: "GET",
       url: "/api/games",
       data: {
-        time: $("#time").val(),
+        category: $("#category").val(),
         rating: $("#rating").val(),
         // eslint-disable-next-line camelcase
         released_date: $("#released_date").val(),
@@ -63,9 +61,8 @@ $(document).ready(function() {
         genre: $("#genre").val()
       }
     })
-      .then(response => {
+      .then(() => {
         window.location.href = "/api/gamesDisplay";
-        console.log(response);
       })
       .catch(err => {
         throw err;
@@ -76,8 +73,6 @@ $(document).ready(function() {
 
   $(".preferGame").on("click", event => {
     event.preventDefault();
-
-    console.log("clicked");
 
     $.ajax({
       method: "POST",
@@ -92,7 +87,7 @@ $(document).ready(function() {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   });
 });

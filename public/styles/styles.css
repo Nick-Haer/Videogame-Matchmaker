@@ -1,140 +1,140 @@
 html {
-  height:100%;
+  height: 100%;
 }
 
 body {
-  margin:0;
+  margin: 0;
 }
 
 h1 {
-  font-family:monospace;
+  font-family: monospace;
 }
 html {
-  height:100%;
+  height: 100%;
 }
 
 body {
-  margin:0;
+  margin: 0;
 }
 
-
 .bg {
-  animation:slide 3s ease-in-out infinite alternate;
+  animation: slide 3s ease-in-out infinite alternate;
   background-image: linear-gradient(-60deg, brown 50%, black 50%);
-  bottom:0;
-  left:-50%;
-  opacity:.5;
-  position:fixed;
-  right:-50%;
-  top:0;
-  z-index:-1;
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
 }
 
 .bg2 {
-  animation-direction:alternate-reverse;
-  animation-duration:4s;
+  animation-direction: alternate-reverse;
+  animation-duration: 4s;
 }
 
 .bg3 {
-  animation-duration:5s;
+  animation-duration: 5s;
 }
 
 h1 {
-  font-family:monospace;
+  font-family: monospace;
 }
 
 @keyframes slide {
   0% {
-    transform:translateX(-25%);
+    transform: translateX(-25%);
   }
   100% {
-    transform:translateX(25%);
-  } 
- }
- #small-logo{
-   width: 45px;
-   height: 45px;
-   border: solid rgb(136, 40, 40);
-   margin-left: 12%;
-   /* margin-right: 2%; */
- }
- .site-content{
-  margin-left: auto;
-    margin-right: auto;
-    background-color: rgba(255, 255, 255, 0.781);
-    width: 76%;
-    margin-top: 3%;
-    padding: 1%;
-    border: 5px double darkslategray;
-    border-radius: 18px;
-    margin-bottom: 3%;
+    transform: translateX(25%);
   }
- img{
+}
+#small-logo {
+  width: 45px;
+  height: 45px;
+  border: solid rgb(136, 40, 40);
+  margin-left: 12%;
+  /* margin-right: 2%; */
+}
+.site-content {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 255, 255, 0.781);
+  width: 76%;
+  margin-top: 3%;
+  padding: 1%;
+  border: 5px double darkslategray;
+  border-radius: 18px;
+  margin-bottom: 3%;
+}
+img {
   width: 85%;
   /* width: 300px; */
   height: 300px;
   border: solid black;
- }
- .selection{
+}
+.selection {
   width: 50%;
   border: solid rgb(116, 38, 38);
   border-radius: 6px;
   padding: 0.5%;
   margin-top: 1.5%;
- }
- hr{
+}
+hr {
   border: double rgb(129, 41, 41);
- }
- .questions{
+}
+.questions {
   font-family: 'Grenze', serif;
- }
- .submit{
-   text-align: center;
- }
- #submit-btn{
+}
+.submit {
+  text-align: center;
+}
+#submit-btn {
   width: 13%;
   border: solid brown;
   padding: 0.5%;
   background-color: white;
- }
- #submit-btn:hover {
+}
+#submit-btn:hover {
   background-image: linear-gradient(brown, black);
   color: white;
   border: solid gray;
 }
 
-#login-content{
+#login-content {
   text-align: center;
   width: 45%;
   font-family: 'Grenze', serif;
-
 }
-#login-btn, #go-to-signup-btn, #signup-btn{
+#login-btn,
+#go-to-signup-btn,
+#signup-btn {
   width: 13%;
   border: solid brown;
   padding: 0.5%;
   background-color: white;
- }
- #login-btn:hover, #go-to-signup-btn:hover, #signup-btn:hover {
+}
+#login-btn:hover,
+#go-to-signup-btn:hover,
+#signup-btn:hover {
   background-image: linear-gradient(brown, black);
   color: white;
   border: solid gray;
 }
-.signup{
+.signup {
   margin-top: 10px;
 }
-#signup-content{
+#signup-content {
   text-align: center;
   width: 45%;
   font-family: 'Grenze', serif;
-
 }
-.cards{
+.cards {
   display: flex;
   justify-content: space-between;
   margin-top: 5%;
   font-family: 'Grenze', serif;
-
 }
 
 #navbarNav {
@@ -142,39 +142,44 @@ h1 {
 }
 .siteTitle {
   font-size: 2.25rem;
-    margin-left: 2%;
-    margin-right: 34%;
-    font-family: 'Grenze', serif;
+  margin-left: 2%;
+  margin-right: 34%;
+  font-family: 'Grenze', serif;
 }
-a{
+a {
   color: brown;
   margin-left: 2%;
 }
 
+#homeNavigationButton {
+  border: 1px solid black;
+  background-color: blue;
+}
+
 @media only screen and (max-width: 768px) {
-  .selection{
+  .selection {
     width: 100%;
   }
-  #login-content{
+  #login-content {
     width: 87%;
   }
-  #signup-content{
+  #signup-content {
     width: 87%;
   }
-  .card{
+  .card {
     margin: 10px;
   }
 }
 @media screen and (max-width: 450px) {
-  #submit-btn{
+  #submit-btn {
     width: 42%;
   }
-  #login-btn, #go-to-signup-btn, #signup-btn{
+  #login-btn,
+  #go-to-signup-btn,
+  #signup-btn {
     width: 26%;
-
-   }
-   .cards{
-     display: initial;
-   }
-   
+  }
+  .cards {
+    display: initial;
+  }
 }

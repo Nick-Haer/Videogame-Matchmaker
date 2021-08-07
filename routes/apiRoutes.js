@@ -37,13 +37,14 @@ module.exports = function(app) {
       });
   });
 
-  //This request uses the gameData vairable, which is declared globally, and stores the information from the IGDB api in an array, to send the data on games to results page, which is render in Handlebars.
+  //This request uses the gameData variable, which is declared globally, and stores the information from the IGDB api in an array,
+  //  to send the data on games to results page, which is rendered in Handlebars.
 
-  // The api returns dome data in weird ways, such as time to complete a game in minutes, and rating out to approx 10 decimal points. The loop within this request handker cleans that data up for presentation.
+  // The api requests game data in using unique parameters that correspond to Rorschach test answers,
+  //  such as time to complete a game in minutes, and rating out to approx 10 decimal points.
+  //  The loop within this request handler cleans that data up for presentation.
 
   app.get("/api/gamesDisplay", function(req, res) {
-    console.log(gameData);
-
     if (gameData.length === 0) {
       res.render("noGames");
     }
@@ -70,16 +71,15 @@ module.exports = function(app) {
     }
   });
 
-  //this request handler receives the values sent in when the users complete their Rorschach tests. It then converts this data into style that the api will understand in its query filters. It then queries the api. The game data returned is then stored in gameData to be rendered by the request handler above. Laslty, The response of this request handler redirects to the route above.
+  //this request handler receives the values sent in when the users complete their Rorschach tests. 
+  // It then converts this data into style that the api will understand in its query filters. 
+  // It then queries the api. The game data returned is then stored in gameData to be rendered by the request handler above. 
+  // Lastly, The response of this request handler redirects to the route above.
 
   app.get("/api/games", function(req, res) {
+    let { category, rating, released_date, multiplayer, genre } = req.query;
 
-    console.log(req.user);
-    let { time, rating, released_date, multiplayer, genre } = req.query;
-
-    // let minMinsToComplete = 0;
-
-    // let maxMinsToComplete = 0;
+    let categoryEnum = 0;
 
     let minRatingScore = 0;
 
@@ -92,30 +92,20 @@ module.exports = function(app) {
     let multiplayerStatus =
       multiplayer === "multi" ? "multiplayer" : "single-player";
 
-    console.log(multiplayerStatus);
-
-    console.log(genre);
-
     let [genreOne, genreTwo, genreThree] = genre.split(", ");
 
-    console.log(genreOne);
-
-    //determining what constitutes a short/med/long game
-    switch (time) {
-    case "short":
-      maxMinsToComplete = 1000;
+    switch (category) {
+    case "remaster":
+      categoryEnum = 9;
       break;
-    case "medium":
-      minMinsToComplete = 1000;
-      maxMinsToComplete = 1750;
-
-      break;
-    case "long":
-      minMinsToComplete = 1750;
-      maxMinsToComplete = 99999;
-
+    case "mod":
+      categoryEnum = 5;
+      break;  
+    case "main":
+      categoryEnum = 0;
       break;
     }
+
     //determining what constitutes a low/med/high rating for a game
     switch (rating) {
     case "low":
@@ -128,7 +118,6 @@ module.exports = function(app) {
     case "high":
       minRatingScore = 86;
       maxRatingScore = 100;
-
       break;
     }
 
@@ -149,10 +138,7 @@ module.exports = function(app) {
       break;
     }
 
-    console.log(process.env.API_KEY, "key");
-
-    const data = `fields name, screenshots.*, summary, platforms.slug, total_rating, cover.*, genres.slug, category; where (release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & game_modes.slug = "${multiplayerStatus}") & (genres.slug = "${genreOne}" | genres.slug = "${genreTwo}" | genres.slug = "${genreThree}"); sort popularity desc;`;
-    console.log(data);
+    const data = `fields name, screenshots.*, summary, platforms.slug, total_rating, cover.*, genres.slug, category; where (release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & category=${categoryEnum} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & game_modes.slug = "${multiplayerStatus}") & (genres.slug = "${genreOne}" | genres.slug = "${genreTwo}" | genres.slug = "${genreThree}"); sort popularity desc;`;
 
     axios({
       url: "https://api.igdb.com/v4/games",
@@ -166,13 +152,11 @@ module.exports = function(app) {
       data,
     })
       .then(response => {
-        console.log(response.data, "mine");
         gameData = response.data;
 
         res.status(200).end();
       })
       .catch(err => {
-        console.log("kapowmaboom");
         console.error(err);
       });
   });
@@ -187,10 +171,8 @@ module.exports = function(app) {
         })
         .then(data => {
           res.status(200).json(data);
-          console.log(data);
         });
     } else {
-      console.log("reached else condition");
       res.json("loginPrompt");
     }
   });
@@ -204,13 +186,3 @@ module.exports = function(app) {
   });
 };
 
-//A delete button would make a good future addition.
-
-// app.delete("/api/examples/:id", function (req, res) {
-//   db.Example.destroy({ where: { id: req.params.id } }).then(function (
-//     dbExample
-//   ) {
-//     res.json(dbExample);
-//   });
-// });
-// };
