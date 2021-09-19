@@ -80,6 +80,7 @@ module.exports = function(app) {
   // Lastly, The response of this request handler redirects to the route above.
 
   app.get("/api/games", function(req, res) {
+    console.log("hitnext");
     let { category, rating, released_date, multiplayer, genre } = req.query;
 
     let categoryEnum = 0;
@@ -142,13 +143,12 @@ module.exports = function(app) {
     }
 
     const data = `fields name, screenshots.*, summary, platforms.slug, total_rating, cover.*, genres.slug, category; where (release_dates.date > ${minDate} & release_dates.date <= ${maxDate} & category=${categoryEnum} & rating > ${minRatingScore} & rating<= ${maxRatingScore} & game_modes.slug = "${multiplayerStatus}") & (genres.slug = "${genreOne}" | genres.slug = "${genreTwo}" | genres.slug = "${genreThree}"); sort popularity desc;`;
-
+    console.log(clientID, auth, "data");
     axios({
       url: "https://api.igdb.com/v4/games",
       method: "POST",
       headers: {
         Accept: "application/json",
-        // "user-key": process.env.API_KEY
         "Client-ID": clientID,
         "Authorization": auth,
       },
@@ -160,7 +160,7 @@ module.exports = function(app) {
         res.status(200).end();
       })
       .catch(err => {
-        console.error(err);
+        console.error(err.message);
       });
   });
 
