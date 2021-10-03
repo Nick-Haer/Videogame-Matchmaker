@@ -156,6 +156,11 @@ a {
   background-color: blue;
 }
 
+.aboutUsImage {
+  width: 100%;
+  height: 350px;
+}
+
 @media only screen and (max-width: 768px) {
   .selection {
     width: 100%;
